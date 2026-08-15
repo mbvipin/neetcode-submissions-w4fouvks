@@ -1,0 +1,37 @@
+class Solution {
+    public int trap(int[] height) {
+
+        Stack<Integer> stack= new Stack<>();
+
+        int res=0;
+
+        for(int i=0; i< height.length; i++)
+        {
+            while( !stack.isEmpty() && height[i] >height[stack.peek()])
+            {
+                int bottom= height[stack.pop()];
+
+                if( !stack.isEmpty())
+                {
+                    int left= height[stack.peek()];
+                    int right= height[i];
+
+                    int h= Math.min(left,right) - bottom;
+                    int w= i- stack.peek()-1;
+
+                    res += h *w;
+
+                }
+
+
+
+            }
+
+            stack.push(i);
+
+        }
+
+        return res;
+        
+    }
+}
